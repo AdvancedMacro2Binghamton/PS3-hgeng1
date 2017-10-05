@@ -78,9 +78,5 @@ while abs(aggsav) >= 0.01 ;
     mu=MuNew;
   end
    %Market clear
-   aggsav=mu(1,:)*a'+mu(2,:)*a'
-   if aggsav>=0;
-       q_min=q_guess;
-   else q_max=q_guess;
-   end
+   aggsav
 end
