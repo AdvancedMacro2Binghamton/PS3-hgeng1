@@ -74,7 +74,7 @@ while (abs(aggsav) >= 0.01) ;
     dis = max(max(abs(mu-MuNew)));
     mu=MuNew;
   end
-   %Market clearS
+   %Market clears
    aggsav=mu(1,:)*pol_fn(1,:)'+mu(2,:)*pol_fn(2,:)';
    if aggsav>0;
        q_min=q_guess;
@@ -116,7 +116,7 @@ hold off
 wealth1=wealth;
 wealth1(wealth1<0)=0;
 figure(3)
-suptitle('Lorenz Curve' )
+suptitle('Lorenz Curve I' )
 subplot(1,2,1)
 gini_wealth1=gini(pop, wealth1,true);% download gini.m online
 title(['Wealth, gini=',num2str(gini_wealth1)])
@@ -145,19 +145,20 @@ EARNING(:,3)=EARNING(:,3)/e;
 gini_earning2 = 1 - sum((EARNING(1:end-1,3)+EARNING(2:end,3)) .* diff(EARNING(:,2)));
 
 figure(4)
+suptitle('Lorenz Curve II' )
+subplot(1,2,1)
 area(WEALTH(:,2),WEALTH(:,3),'FaceColor',[0.5,0.5,1.0])
 hold on
 plot([0,1],[0,1],'--k')
-suptitle('Lorenz Curve of Wealth')
-title(['Gini coefficient=',num2str(gini_wealth2)])
+axis square
+title(['Wealth, Gini=',num2str(gini_wealth2)])
 hold off
-
-figure(5)
+subplot(1,2,2)
 area(EARNING(:,2),EARNING(:,3),'FaceColor',[0.5,0.5,1.0])
 hold on
 plot([0,1],[0,1],'--k')
-suptitle('Lorenz Curve of Earning')
-title(['Gini coefficient=',num2str(gini_earning2)])
+axis square
+title(['Earning, Gini=',num2str(gini_earning2)])
 hold off
 
 PI_stat=PI^num_a; %long-run probability
@@ -167,7 +168,7 @@ lambda=((v_guess.^(-1)).*W_FB).^(1/(1-sigma))-1;%consumption equivalent
 Hh_B=sum(sum((lambda>0).*mu));%franction W_FB is better than v(s,a)
 WG=sum(sum(lambda.*mu)); % welfare gain
 
-figure(6)
+figure(5)
 plot(a,lambda(1,:),'blue',a,lambda(2,:),'r')
 legend('Employed','Unemployed','location','northeast')
 suptitle(['Consumption Equivalent'])
